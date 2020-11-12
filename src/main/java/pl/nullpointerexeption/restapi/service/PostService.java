@@ -46,7 +46,7 @@ public class PostService {
                 .map(Post::getId)
                 .collect(Collectors.toList());
         List<Comment> comments = commentRepository.findAllByPostIdIn(ids);
-        allPosts.forEach(post -> post.setComment(extractComments(comments, post.getId())));
+        allPosts.forEach(post -> post.setComments(extractComments(comments, post.getId())));
         return PostMapper.mapToPostViews(allPosts);
     }
 

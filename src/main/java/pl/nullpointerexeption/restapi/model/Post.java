@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,15 +39,15 @@ public class Post {
     @Column
     private String content;
 
-    // FIXME
+    @Column
     @CreatedDate
     private LocalDateTime created;
 
-    // FIXME
+    @Column
     @LastModifiedDate
     private LocalDateTime modified;
 
     @OneToMany
     @JoinColumn(name = "postId", updatable = false, insertable = false)
-    private List<Comment> comment;
+    private List<Comment> comments;
 }

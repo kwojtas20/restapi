@@ -33,11 +33,11 @@ public class PostMapper {
     }
 
     public static PostView mapToPostView(Post post) {
-        return PostView.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .created(post.getCreated())
-                .build();
+        return new PostView(post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                null, // post.getComments(), trzeba zmapować na widok
+                post.getCreated(),
+                post.getModified());
     }
 }

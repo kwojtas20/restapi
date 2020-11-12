@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .withDefaultSchema()
                 .dataSource(dateSource)
-                .withUser("test")
-                .password("{bcrypt}" + new BCryptPasswordEncoder().encode("test"))
+                .withUser("string")
+                .password("{bcrypt}" + new BCryptPasswordEncoder().encode("string"))
                 .roles("USER");
     }
 
@@ -76,8 +76,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationFilter;
 
     }
+
     @Bean
-    public UserDetailsManager userDetailsManager(){
+    public UserDetailsManager userDetailsManager() {
         return new JdbcUserDetailsManager(dateSource);
     }
 }

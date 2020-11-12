@@ -1,6 +1,6 @@
 package pl.nullpointerexeption.restapi.controller.view;
 
-import lombok.Builder;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * Ta klasa jest wykorzystywana przy pobieraniu danych w restach GET
  */
-@Builder
+@Value
 public class PostView {
 
-    private final long id;
-    private final String title;
-    private final String content;
-    private final List<CommentView> comment;
-    private final LocalDateTime created;
-    private final LocalDateTime modified;
+    long id;
+    String title;
+    String content;
+    List<CommentView> comment;
+    LocalDateTime created;
+    LocalDateTime modified;
 }
