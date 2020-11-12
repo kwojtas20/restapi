@@ -1,0 +1,26 @@
+1. @Component - główna adnotacja do tworzenia komponentów.
+    1.1 @RestController - oznacza kontroler restowy - zwracający odpowiedzi http z np. jakimś body w postaci *.json
+    1.2 @Controller - oznacza kontroler zwracający np. stronę *.jsp (java server pages)
+    1.3 @Service    - oznacza komponent - serwis w aplikacji zawierający jakąś logikę
+    1.4 @Repository - oznacza komponent - repozytorium do komunikacji ze źródłem danych
+
+2. @RequestMapping - główna adnotacja do definiowania metod http rest:
+    2.1 @GetMapping - oznacza utworzenie metody rest GET pod adresem
+    2.2 @PostMapping
+    2.3 @PutMapping
+    2.4 @PatchMapping
+    2.5 @DeleteMapping
+
+
+
+Przykłady zapisywania metod:
+
+public List<String> getNames(String name, Long number) {
+    // ciało metody
+    return new ArrayList();
+}
+
+CRUD – od ang. create, read, update and delete (pol. utwórz, odczytaj, aktualizuj i usuń)
+– cztery podstawowe funkcje w aplikacjach korzystających z pamięci trwałej,
+które umożliwiają zarządzanie nią. Niekiedy litera R jest rozwijana jako retrieve (pobierz)
+zamiast read (odczytaj).
