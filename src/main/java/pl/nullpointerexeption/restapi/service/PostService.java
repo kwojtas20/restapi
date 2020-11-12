@@ -79,4 +79,11 @@ public class PostService {
     public void clearPostsWithComments() {
 
     }
+
+    public PostView getPostWithComments(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        List<Comment> comments = commentRepository.findAllByPostId(post.getId());
+        post.setComments(comments);
+        return PostMapper.mapToPostView(post);
+    }
 }

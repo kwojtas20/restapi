@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @GetMapping("/comments")
-    public List<PostView> getPostsWithComment(@RequestParam(required = false) Integer page,
+    public List<PostView> getPostsWithComments(@RequestParam(required = false) Integer page,
                                               @RequestParam(required = false) Sort.Direction sortDirection) {
         return postService.getPostsWithComments(
                 checkPageNumber(page),
@@ -42,9 +42,14 @@ public class PostController {
         );
     }
 
-    @GetMapping("/{id}")
-    public PostView getSinglePost(@PathVariable Long id) {
-        return postService.getSinglePost(id);
+    @GetMapping("/{postId}/comments")
+    public PostView getPostWithComments(@PathVariable Long postId) {
+        return postService.getPostWithComments(postId);
+    }
+
+    @GetMapping("/{postId}")
+    public PostView getSinglePost(@PathVariable Long postId) {
+        return postService.getSinglePost(postId);
     }
 
     @PostMapping
@@ -52,9 +57,9 @@ public class PostController {
         return postService.addPost(postDto);
     }
 
-    @PutMapping("/{id}")
-    public Post editPost(@PathVariable Long id, @RequestBody PostDto postDto) {
-        return postService.editPost(id, postDto);
+    @PutMapping("/{postId}")
+    public Post editPost(@PathVariable Long postId, @RequestBody PostDto postDto) {
+        return postService.editPost(postId, postDto);
     }
 
     private int checkPageNumber(Integer page) {

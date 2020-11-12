@@ -14,7 +14,7 @@ public class PostView {
     long id;
     String title;
     String content;
-    List<CommentView> comment;
+    List<CommentView> comments;
     LocalDateTime created;
     LocalDateTime modified;
 }

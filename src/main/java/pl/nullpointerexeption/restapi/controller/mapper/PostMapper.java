@@ -18,7 +18,6 @@ public class PostMapper {
                 .collect(Collectors.toList());
     }
 
-    // FIXME
     public static List<PostView> mapToPostViews(List<Post> posts) {
         return posts.stream()
                 .map(PostMapper::mapToPostView)
@@ -36,7 +35,7 @@ public class PostMapper {
         return new PostView(post.getId(),
                 post.getTitle(),
                 post.getContent(),
-                null, // post.getComments(), trzeba zmapować na widok
+                CommentMapper.mapToCommentViews(post.getComments()),
                 post.getCreated(),
                 post.getModified());
     }
