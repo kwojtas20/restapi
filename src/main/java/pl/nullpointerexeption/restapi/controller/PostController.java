@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.nullpointerexeption.restapi.controller.dto.PostDto;
+import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
-import pl.nullpointerexeption.restapi.model.Post;
+import pl.nullpointerexeption.restapi.entity.Post;
 import pl.nullpointerexeption.restapi.service.PostService;
 
 import java.util.List;
@@ -53,13 +53,13 @@ public class PostController {
     }
 
     @PostMapping
-    public Post addPost(@RequestBody PostDto postDto) {
-        return postService.addPost(postDto);
+    public Post addPost(@RequestBody PostModel postModel) {
+        return postService.addPost(postModel);
     }
 
     @PutMapping("/{postId}")
-    public Post editPost(@PathVariable Long postId, @RequestBody PostDto postDto) {
-        return postService.editPost(postId, postDto);
+    public Post editPost(@PathVariable Long postId, @RequestBody PostModel postModel) {
+        return postService.editPost(postId, postModel);
     }
 
     private int checkPageNumber(Integer page) {

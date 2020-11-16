@@ -16,4 +16,10 @@ https://www.ehcache.org/schema/ehcache-core-3.0.xsd">
         </expiry>
         <heap>500</heap>
     </cache>
+    <cache alias="SingleUser">
+        <expiry>
+            <ttl unit="hours">4</ttl>
+        </expiry>
+        <heap>500</heap>
+    </cache>
 </config>

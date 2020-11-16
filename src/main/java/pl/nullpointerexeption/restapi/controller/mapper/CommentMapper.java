@@ -3,7 +3,7 @@ package pl.nullpointerexeption.restapi.controller.mapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import pl.nullpointerexeption.restapi.controller.view.CommentView;
-import pl.nullpointerexeption.restapi.model.Comment;
+import pl.nullpointerexeption.restapi.entity.Comment;
 
 import java.util.List;
 import java.util.stream.Collectors;

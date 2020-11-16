@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi.model;
+package pl.nullpointerexeption.restapi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,17 +24,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Comment {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    private Long postId;
+    private String firstName;
 
     @Column
-    private String content;
+    private String secondName;
+
+    @Column
+    private String surname;
 
     @Column
     @CreatedDate

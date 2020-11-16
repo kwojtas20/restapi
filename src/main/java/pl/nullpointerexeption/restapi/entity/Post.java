@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi.model;
+package pl.nullpointerexeption.restapi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -50,4 +51,8 @@ public class Post {
     @OneToMany
     @JoinColumn(name = "postId", updatable = false, insertable = false)
     private List<Comment> comments;
+
+    @OneToOne
+    @JoinColumn(name = "userId", updatable = false, insertable = false)
+    private User user;
 }

@@ -7,11 +7,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.nullpointerexeption.restapi.controller.dto.PostDto;
 import pl.nullpointerexeption.restapi.controller.mapper.PostMapper;
+import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
-import pl.nullpointerexeption.restapi.model.Comment;
-import pl.nullpointerexeption.restapi.model.Post;
+import pl.nullpointerexeption.restapi.entity.Comment;
+import pl.nullpointerexeption.restapi.entity.Post;
 import pl.nullpointerexeption.restapi.repository.CommentRepository;
 import pl.nullpointerexeption.restapi.repository.PostRepository;
 
@@ -56,13 +56,13 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public Post addPost(PostDto post) {
+    public Post addPost(PostModel post) {
         return postRepository.save(PostMapper.mapToPost(post));
     }
 
     // FIXME
     @CachePut(cacheNames = "SinglePost", key = "#result.id")
-    public Post editPost(Long id, PostDto post) {
+    public Post editPost(Long id, PostModel post) {
         Post postEdited = postRepository.findById(id).orElseThrow();
         postEdited.setId(id);
         postEdited.setTitle(post.getTitle());

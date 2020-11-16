@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi.controller.dto;
+package pl.nullpointerexeption.restapi.controller.model;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * Ta klasa jest wykorzystywana przy ładowaniu danych w restach POST, PUT, PATCH
  */
 @Data
-public class CommentDto {
+public class CommentModel {
 
     private Long postId;
     private String content;

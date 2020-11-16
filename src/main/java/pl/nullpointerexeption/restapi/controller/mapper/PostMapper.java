@@ -2,9 +2,9 @@ package pl.nullpointerexeption.restapi.controller.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pl.nullpointerexeption.restapi.controller.dto.PostDto;
+import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
-import pl.nullpointerexeption.restapi.model.Post;
+import pl.nullpointerexeption.restapi.entity.Post;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostMapper {
 
-    public static List<Post> mapToPosts(List<PostDto> postDtos) {
-        return postDtos.stream()
+    public static List<Post> mapToPosts(List<PostModel> postModels) {
+        return postModels.stream()
                 .map(PostMapper::mapToPost)
                 .collect(Collectors.toList());
     }
@@ -24,10 +24,10 @@ public class PostMapper {
                 .collect(Collectors.toList());
     }
 
-    public static Post mapToPost(PostDto postDto) {
+    public static Post mapToPost(PostModel postModel) {
         return Post.builder()
-                .title(postDto.getTitle())
-                .content(postDto.getContent())
+                .title(postModel.getTitle())
+                .content(postModel.getContent())
                 .build();
     }
 
