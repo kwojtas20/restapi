@@ -48,16 +48,22 @@ test {
 }
 task generatePostsAndComments() {
 	doLast {
-		File dataSql = file("src/main/resources/data.sql")
+		File dataSql = file("src/main/resources/data.sql") as File
 		dataSql.write("")
+		//użytkownicy
+		for (int i = 1; i <= 11; i++) {
+			dataSql.append("insert into user(id, first_name, second_name, surname, created) " +
+					"values (${i}, 'First name ${i}', 'Second name ${i}', 'Surname ${i}', '"+ LocalDateTime.now().minusDays(100 - i) +"');\n")
+		}
 		//posty
 		for (int i = 1; i <= 100; i++) {
-			dataSql.append("insert into post(id, title, content, created) " +
-					"values (${i}, 'Test post ${i}', 'Content ${i}', '"+ LocalDateTime.now().minusDays(100 - i) +"');\n")
+			int userId = (int) (1 + i / 10)
+			dataSql.append("insert into post(id, user_id, title, content, created) " +
+					"values (${i}, ${userId},'Title ${i}', 'Content ${i}', '"+ LocalDateTime.now().minusDays(100 - i) +"');\n")
 		}
 		//komentarze
 		for (int i = 1; i <= 100; i++) {
-			int postId = 1 + i / 10
+			int postId = (int) (1 + i / 10)
 			dataSql.append("insert into comment(id, post_id, content, created) " +
 					"values (${i}, ${postId}, 'Comment ${i}', '"+ LocalDateTime.now().minusDays(100 - i) +"');\n")
 		}
