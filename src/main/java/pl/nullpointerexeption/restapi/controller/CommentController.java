@@ -11,46 +11,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.nullpointerexeption.restapi.controller.model.UserModel;
-import pl.nullpointerexeption.restapi.controller.view.UserView;
-import pl.nullpointerexeption.restapi.service.UserService;
+import pl.nullpointerexeption.restapi.controller.model.CommentModel;
+import pl.nullpointerexeption.restapi.controller.view.CommentView;
+import pl.nullpointerexeption.restapi.service.CommentService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/comments")
+public class CommentController {
 
-    private final UserService userService;
+    private final CommentService commentService;
 
-    @GetMapping("/{userId}")
-    public UserView getSingleUser(@PathVariable Long userId) {
-        return userService.getSingleUser(userId);
+    @GetMapping("/{commentId}")
+    public CommentView getSingleComment(@PathVariable Long commentId) {
+        return commentService.getSingleComment(commentId);
     }
 
     @PostMapping
-    public UserView addUser(@RequestBody UserModel userModel) {
-        return userService.addUser(userModel);
+    public CommentView addComment(@RequestBody CommentModel commentModel) {
+        return commentService.addComment(commentModel);
     }
 
     @GetMapping // Ta adnotacja oznacza utworzenie metody rest GET pod adresem /posts
-    public List<UserView> getUsers(@RequestParam(required = false) Integer page,
-                                   @RequestParam(required = false) Sort.Direction sortDirection) {
-        return userService.getUsers(
+    public List<CommentView> getComments(@RequestParam(required = false) Integer page,
+                                         @RequestParam(required = false) Sort.Direction sortDirection) {
+        return commentService.getComments(
                 checkPageNumber(page),
                 checkSortDirection(sortDirection)
         );
     }
 
-    @PutMapping("/{userId}")
-    public UserView editUser(@PathVariable Long userId, @RequestBody UserModel userModel) {
-        return userService.editUser(userId, userModel);
+    @PutMapping("/{commentId}")
+    public CommentView editComment(@PathVariable Long commentId, @RequestBody CommentModel commentModel) {
+        return commentService.editComment(commentId, commentModel);
     }
 
-    @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
     }
 
     private int checkPageNumber(Integer page) {

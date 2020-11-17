@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Value
 public class CommentView {
 
-    long id;
-    Long postId;
-    String content;
+    Long id;
     LocalDateTime created;
     LocalDateTime modified;
+    String content;
+    Long postId;
 }

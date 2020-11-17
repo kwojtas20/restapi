@@ -10,13 +10,19 @@ https://www.ehcache.org/schema/ehcache-core-3.0.xsd">
         <heap>1000</heap>
     </cache-template>
     <cache alias="PostsWithComments" uses-template="default"/>
+    <cache alias="SingleUser">
+        <expiry>
+            <ttl unit="hours">4</ttl>
+        </expiry>
+        <heap>500</heap>
+    </cache>
     <cache alias="SinglePost">
         <expiry>
             <ttl unit="hours">4</ttl>
         </expiry>
         <heap>500</heap>
     </cache>
-    <cache alias="SingleUser">
+    <cache alias="SingleComment">
         <expiry>
             <ttl unit="hours">4</ttl>
         </expiry>

@@ -18,11 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
     public static final int PAGE_SIZE = 10;
 
+    private final UserRepository userRepository;
+
     @Cacheable(cacheNames = "SingleUser", key = "#id")
-    public UserView getSingleUser(long id) {
+    public UserView getSingleUser(Long id) {
         return UserMapper.mapToUserView(userRepository.findById(id).orElseThrow());
     }
 
@@ -39,7 +40,6 @@ public class UserService {
     @CachePut(cacheNames = "SingleUser", key = "#result.id")
     public UserView editUser(Long id, UserModel user) {
         User userEdited = userRepository.findById(id).orElseThrow();
-        userEdited.setId(id);
         userEdited.setFirstName(user.getFirstName());
         userEdited.setSecondName(user.getSecondName());
         userEdited.setSurname(user.getSurname());

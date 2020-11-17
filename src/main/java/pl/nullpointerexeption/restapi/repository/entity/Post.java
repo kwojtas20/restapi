@@ -33,13 +33,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column
-    private String title;
-
-    @Column
-    private String content;
+    private Long id;
 
     @Column
     @CreatedDate
@@ -49,11 +43,17 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime modified;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "postId", updatable = false, insertable = false)
-    private List<Comment> comments;
+    @Column
+    private String title;
+
+    @Column
+    private String content;
 
     @OneToOne
     @JoinColumn(name = "userId", updatable = false, insertable = false)
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "postId", updatable = false, insertable = false)
+    private List<Comment> comments;
 }

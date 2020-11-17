@@ -11,10 +11,11 @@ import java.util.List;
 @Value
 public class PostView {
 
-    long id;
-    String title;
-    String content;
-    List<CommentView> comments;
+    Long id;
     LocalDateTime created;
     LocalDateTime modified;
+    String title;
+    String content;
+    Long userId;
+    List<CommentView> comments;
 }

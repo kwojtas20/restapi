@@ -30,14 +30,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToOne
-    @JoinColumn(name = "postId", updatable = false, insertable = false)
-    private Post post;
-
-    @Column
-    private String content;
+    private Long id;
 
     @Column
     @CreatedDate
@@ -46,4 +39,11 @@ public class Comment {
     @Column
     @LastModifiedDate
     private LocalDateTime modified;
+
+    @Column
+    private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "postId", updatable = false, insertable = false)
+    private Post post;
 }

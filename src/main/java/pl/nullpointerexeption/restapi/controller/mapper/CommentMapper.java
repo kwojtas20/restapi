@@ -2,6 +2,7 @@ package pl.nullpointerexeption.restapi.controller.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import pl.nullpointerexeption.restapi.controller.model.CommentModel;
 import pl.nullpointerexeption.restapi.controller.view.CommentView;
 import pl.nullpointerexeption.restapi.repository.entity.Comment;
 
@@ -19,9 +20,15 @@ public class CommentMapper {
 
     public static CommentView mapToCommentView(Comment comment) {
         return new CommentView(comment.getId(),
-                comment.getPost().getId(),
-                comment.getContent(),
                 comment.getCreated(),
-                comment.getModified());
+                comment.getModified(),
+                comment.getContent(),
+                comment.getPost().getId());
+    }
+
+    public static Comment mapToComment(CommentModel commentModel) {
+        return Comment.builder()
+                .content(commentModel.getContent())
+                .build();
     }
 }

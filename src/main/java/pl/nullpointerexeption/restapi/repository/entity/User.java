@@ -32,7 +32,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column
+    @CreatedDate
+    private LocalDateTime created;
+
+    @Column
+    @LastModifiedDate
+    private LocalDateTime modified;
 
     @Column
     private String firstName;
@@ -46,12 +54,4 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", updatable = false, insertable = false)
     private List<Post> posts;
-
-    @Column
-    @CreatedDate
-    private LocalDateTime created;
-
-    @Column
-    @LastModifiedDate
-    private LocalDateTime modified;
 }

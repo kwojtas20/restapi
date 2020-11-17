@@ -12,8 +12,10 @@ import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
 import pl.nullpointerexeption.restapi.repository.CommentRepository;
 import pl.nullpointerexeption.restapi.repository.PostRepository;
+import pl.nullpointerexeption.restapi.repository.UserRepository;
 import pl.nullpointerexeption.restapi.repository.entity.Comment;
 import pl.nullpointerexeption.restapi.repository.entity.Post;
+import pl.nullpointerexeption.restapi.repository.entity.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +25,10 @@ import java.util.stream.Collectors;
 public class PostService {
 
     public static final int PAGE_SIZE = 20;
+
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     public List<PostView> getPosts(int page, Sort.Direction sort) {
         return PostMapper.mapToPostViews(postRepository.findAllPosts(
@@ -33,7 +37,7 @@ public class PostService {
     }
 
     @Cacheable(cacheNames = "SinglePost", key = "#id")
-    public PostView getSinglePost(long id) {
+    public PostView getSinglePost(Long id) {
         return PostMapper.mapToPostView(postRepository.findById(id).orElseThrow());
     }
 
@@ -52,12 +56,15 @@ public class PostService {
 
     private List<Comment> extractComments(List<Comment> comments, Long id) {
         return comments.stream()
-//                .filter(comment -> comment.getPost().getId().equals(id))
+                .filter(comment -> comment.getPost().getId().equals(id))
                 .collect(Collectors.toList());
     }
 
-    public PostView addPost(PostModel post) {
-        return PostMapper.mapToPostView(postRepository.save(PostMapper.mapToPost(post)));
+    public PostView addPost(PostModel postModel) {
+        User user = userRepository.findById(postModel.getUserId()).orElseThrow();
+        Post post = PostMapper.mapToPost(postModel);
+        post.setUser(user);
+        return PostMapper.mapToPostView(postRepository.save(post));
     }
 
     // FIXME: Fix comments
@@ -71,7 +78,7 @@ public class PostService {
     }
 
     @CacheEvict(cacheNames = "SinglePost")
-    public void deletePost(long id) {
+    public void deletePost(Long id) {
         postRepository.deleteById(id);
     }
 

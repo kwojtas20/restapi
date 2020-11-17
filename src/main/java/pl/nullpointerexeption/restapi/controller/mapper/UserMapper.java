@@ -14,11 +14,12 @@ public class UserMapper {
 
     public static UserView mapToUserView(User user) {
         return new UserView(user.getId(),
+                user.getCreated(),
+                user.getModified(),
                 user.getFirstName(),
                 user.getSecondName(),
                 user.getSurname(),
-                user.getCreated(),
-                user.getModified());
+                PostMapper.mapToPostViews(user.getPosts()));
     }
 
     public static User mapToUser(UserModel userModel) {

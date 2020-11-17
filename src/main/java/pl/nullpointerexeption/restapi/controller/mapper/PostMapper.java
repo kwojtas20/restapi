@@ -27,10 +27,11 @@ public class PostMapper {
 
     public static PostView mapToPostView(Post post) {
         return new PostView(post.getId(),
+                post.getCreated(),
+                post.getModified(),
                 post.getTitle(),
                 post.getContent(),
-                CommentMapper.mapToCommentViews(post.getComments()),
-                post.getCreated(),
-                post.getModified());
+                post.getUser().getId(),
+                CommentMapper.mapToCommentViews(post.getComments()));
     }
 }
