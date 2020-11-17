@@ -44,6 +44,6 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "postId", updatable = false, insertable = false)
+    @JoinColumn(name = "postId", updatable = false)
     private Post post;
 }

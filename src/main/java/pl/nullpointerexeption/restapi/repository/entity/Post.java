@@ -50,7 +50,7 @@ public class Post {
     private String content;
 
     @OneToOne
-    @JoinColumn(name = "userId", updatable = false, insertable = false)
+    @JoinColumn(name = "userId", updatable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
