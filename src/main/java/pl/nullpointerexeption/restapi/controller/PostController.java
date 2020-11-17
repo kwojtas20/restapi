@@ -2,6 +2,7 @@ package pl.nullpointerexeption.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class PostController {
 
     @GetMapping("/comments")
     public List<PostView> getPostsWithComments(@RequestParam(required = false) Integer page,
-                                              @RequestParam(required = false) Sort.Direction sortDirection) {
+                                               @RequestParam(required = false) Sort.Direction sortDirection) {
         return postService.getPostsWithComments(
                 checkPageNumber(page),
                 checkSortDirection(sortDirection)
@@ -59,6 +60,11 @@ public class PostController {
     @PutMapping("/{postId}")
     public PostView editPost(@PathVariable Long postId, @RequestBody PostModel postModel) {
         return postService.editPost(postId, postModel);
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
     }
 
     private int checkPageNumber(Integer page) {

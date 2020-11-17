@@ -1,6 +1,7 @@
 package pl.nullpointerexeption.restapi.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -9,6 +10,7 @@ import pl.nullpointerexeption.restapi.controller.mapper.UserMapper;
 import pl.nullpointerexeption.restapi.controller.model.UserModel;
 import pl.nullpointerexeption.restapi.controller.view.UserView;
 import pl.nullpointerexeption.restapi.repository.UserRepository;
+import pl.nullpointerexeption.restapi.repository.entity.User;
 
 import java.util.List;
 
@@ -33,5 +35,18 @@ public class UserService {
                 PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id"))
         ));
     }
-}
 
+    @CachePut(cacheNames = "SingleUser", key = "#result.id")
+    public UserView editUser(Long id, UserModel user) {
+        User userEdited = userRepository.findById(id).orElseThrow();
+        userEdited.setId(id);
+        userEdited.setFirstName(user.getFirstName());
+        userEdited.setSecondName(user.getSecondName());
+        userEdited.setSurname(user.getSurname());
+        return UserMapper.mapToUserView(userRepository.save(userEdited));
+    }
+
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+}

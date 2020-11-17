@@ -19,7 +19,7 @@ public class CommentMapper {
 
     public static CommentView mapToCommentView(Comment comment) {
         return new CommentView(comment.getId(),
-                comment.getPostId(),
+                comment.getPost().getId(),
                 comment.getContent(),
                 comment.getCreated(),
                 comment.getModified());

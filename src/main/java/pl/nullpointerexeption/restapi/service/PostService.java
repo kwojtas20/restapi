@@ -52,7 +52,7 @@ public class PostService {
 
     private List<Comment> extractComments(List<Comment> comments, Long id) {
         return comments.stream()
-                .filter(comment -> comment.getPostId().equals(id))
+//                .filter(comment -> comment.getPost().getId().equals(id))
                 .collect(Collectors.toList());
     }
 
