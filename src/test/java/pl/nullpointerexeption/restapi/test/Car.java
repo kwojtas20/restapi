@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi;
+package pl.nullpointerexeption.restapi.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

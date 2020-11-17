@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi.service;
+package pl.nullpointerexeption.restapi.test;
 
 import java.util.function.Function;
 

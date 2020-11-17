@@ -60,7 +60,7 @@ public class PostService {
         return PostMapper.mapToPostView(postRepository.save(PostMapper.mapToPost(post)));
     }
 
-    // FIXME
+    // FIXME: Fix comments
     @CachePut(cacheNames = "SinglePost", key = "#result.id")
     public PostView editPost(Long id, PostModel post) {
         Post postEdited = postRepository.findById(id).orElseThrow();

@@ -1,9 +1,8 @@
-package pl.nullpointerexeption.restapi;
+package pl.nullpointerexeption.restapi.test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.nullpointerexeption.restapi.controller.Person;
 
 import java.util.Arrays;
 import java.util.Comparator;

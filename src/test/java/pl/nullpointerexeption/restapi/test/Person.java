@@ -1,6 +1,4 @@
-package pl.nullpointerexeption.restapi.controller;
-
-import pl.nullpointerexeption.restapi.Car;
+package pl.nullpointerexeption.restapi.test;
 
 import java.util.List;
 
