@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import pl.nullpointerexeption.restapi.controller.mapper.PostMapper;
 import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
-import pl.nullpointerexeption.restapi.entity.Comment;
-import pl.nullpointerexeption.restapi.entity.Post;
 import pl.nullpointerexeption.restapi.repository.CommentRepository;
 import pl.nullpointerexeption.restapi.repository.PostRepository;
+import pl.nullpointerexeption.restapi.repository.entity.Comment;
+import pl.nullpointerexeption.restapi.repository.entity.Post;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,18 +56,18 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public Post addPost(PostModel post) {
-        return postRepository.save(PostMapper.mapToPost(post));
+    public PostView addPost(PostModel post) {
+        return PostMapper.mapToPostView(postRepository.save(PostMapper.mapToPost(post)));
     }
 
     // FIXME
     @CachePut(cacheNames = "SinglePost", key = "#result.id")
-    public Post editPost(Long id, PostModel post) {
+    public PostView editPost(Long id, PostModel post) {
         Post postEdited = postRepository.findById(id).orElseThrow();
         postEdited.setId(id);
         postEdited.setTitle(post.getTitle());
         postEdited.setContent(post.getContent());
-        return postRepository.save(postEdited);
+        return PostMapper.mapToPostView(postRepository.save(postEdited));
     }
 
     @CacheEvict(cacheNames = "SinglePost")
@@ -77,7 +77,7 @@ public class PostService {
 
     @CacheEvict(cacheNames = "PostsWithComments")
     public void clearPostsWithComments() {
-
+        throw new UnsupportedOperationException();
     }
 
     public PostView getPostWithComments(Long postId) {

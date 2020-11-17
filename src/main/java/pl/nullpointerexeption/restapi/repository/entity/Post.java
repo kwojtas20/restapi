@@ -1,4 +1,4 @@
-package pl.nullpointerexeption.restapi.entity;
+package pl.nullpointerexeption.restapi.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

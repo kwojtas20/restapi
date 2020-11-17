@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nullpointerexeption.restapi.controller.model.PostModel;
 import pl.nullpointerexeption.restapi.controller.view.PostView;
-import pl.nullpointerexeption.restapi.entity.Post;
 import pl.nullpointerexeption.restapi.service.PostService;
 
 import java.util.List;
@@ -53,12 +52,12 @@ public class PostController {
     }
 
     @PostMapping
-    public Post addPost(@RequestBody PostModel postModel) {
+    public PostView addPost(@RequestBody PostModel postModel) {
         return postService.addPost(postModel);
     }
 
     @PutMapping("/{postId}")
-    public Post editPost(@PathVariable Long postId, @RequestBody PostModel postModel) {
+    public PostView editPost(@PathVariable Long postId, @RequestBody PostModel postModel) {
         return postService.editPost(postId, postModel);
     }
 
