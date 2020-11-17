@@ -6,6 +6,9 @@ import pl.nullpointerexeption.restapi.controller.model.UserModel;
 import pl.nullpointerexeption.restapi.controller.view.UserView;
 import pl.nullpointerexeption.restapi.repository.entity.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserMapper {
 
@@ -24,5 +27,11 @@ public class UserMapper {
                 .secondName(userModel.getSecondName())
                 .surname(userModel.getSurname())
                 .build();
+    }
+
+    public static List<UserView> mapToUserViews(List<User> users) {
+        return users.stream()
+                .map(UserMapper::mapToUserView)
+                .collect(Collectors.toList());
     }
 }
