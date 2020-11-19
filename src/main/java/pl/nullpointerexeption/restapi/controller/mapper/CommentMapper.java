@@ -33,6 +33,15 @@ public class CommentMapper {
                 comment.getPost().getId());
     }
 
+    public static List<Comment> mapToComments(List<CommentModel> commentModels) {
+        if (commentModels == null) {
+            return new ArrayList<>();
+        }
+        return commentModels.stream()
+                .map(CommentMapper::mapToComment)
+                .collect(Collectors.toList());
+    }
+
     public static Comment mapToComment(CommentModel commentModel) {
         return Comment.builder()
                 .content(commentModel.getContent())

@@ -67,6 +67,11 @@ public class PostController {
         postService.deletePost(postId);
     }
 
+    @DeleteMapping
+    public void deleteAllPosts() {
+        postService.deleteAllPosts();
+    }
+
     private int checkPageNumber(Integer page) {
         return page != null && page >= 0 ? page : 0;
     }

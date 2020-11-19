@@ -53,6 +53,11 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
+    @DeleteMapping
+    public void deleteAllUsers() {
+        userService.deleteAllUsers();
+    }
+
     private int checkPageNumber(Integer page) {
         return page != null && page >= 0 ? page : 0;
     }

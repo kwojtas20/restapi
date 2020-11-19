@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/youtubetest?useUnicode=true&serverTimezone=UTC
+    username: kwojtas
+    password: 12345qwert
+    driverClassName: com.mysql.cj.jdbc.Driver
+  liquibase:
+    change-log: classpath:liquibase-changeLog.xml
+jwt:
+  expirationTime: 3600000
+  secret: cvdfdmkgfkgnfgk12@@@1!

@@ -35,6 +35,15 @@ public class PostMapper {
                 CommentMapper.mapToCommentViews(post.getComments()));
     }
 
+    public static List<Post> mapToPosts(List<PostModel> postModels) {
+        if (postModels == null) {
+            return new ArrayList<>();
+        }
+        return postModels.stream()
+                .map(PostMapper::mapToPost)
+                .collect(Collectors.toList());
+    }
+
     public static Post mapToPost(PostModel postModel) {
         return Post.builder()
                 .title(postModel.getTitle())

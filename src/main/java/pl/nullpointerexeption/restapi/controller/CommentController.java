@@ -53,6 +53,11 @@ public class CommentController {
         commentService.deleteComment(commentId);
     }
 
+    @DeleteMapping
+    public void deleteAllComments() {
+        commentService.deleteAllComments();
+    }
+
     private int checkPageNumber(Integer page) {
         return page != null && page >= 0 ? page : 0;
     }

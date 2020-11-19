@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class CommentModel {
 
-    private String content;
-    private Long postId;
+    private final String content;
+    private final Long postId;
 }

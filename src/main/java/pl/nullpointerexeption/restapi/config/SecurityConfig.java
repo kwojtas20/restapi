@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
@@ -18,18 +17,18 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final DataSource dateSource;
+    private final DataSource dataSource;
     private final ObjectMapper objectMapper;
     private final RestAuthenticationSuccessHandler successHandler;
     private final RestAuthenticationFailureHandler failureHandler;
     private final String secret;
 
-    public SecurityConfig(DataSource dateSource,
+    public SecurityConfig(DataSource dataSource,
                           ObjectMapper objectMapper,
                           RestAuthenticationSuccessHandler successHandler,
                           RestAuthenticationFailureHandler failureHandler,
                           @Value("${jwt.secret}") String secret) {
-        this.dateSource = dateSource;
+        this.dataSource = dataSource;
         this.objectMapper = objectMapper;
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;
@@ -38,12 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .withDefaultSchema()
-                .dataSource(dateSource)
-                .withUser("string")
-                .password("{bcrypt}" + new BCryptPasswordEncoder().encode("string"))
-                .roles("USER");
+        auth.jdbcAuthentication().dataSource(dataSource);
     }
 
     @Override
@@ -80,6 +74,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsManager userDetailsManager() {
-        return new JdbcUserDetailsManager(dateSource);
+        return new JdbcUserDetailsManager(dataSource);
     }
 }

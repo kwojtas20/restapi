@@ -31,10 +31,18 @@ public class UserService {
         return UserMapper.mapToUserView(userRepository.save(UserMapper.mapToUser(user)));
     }
 
+    public List<UserView> addUsers(List<UserModel> userModels) {
+        return UserMapper.mapToUserViews(userRepository.saveAll(UserMapper.mapToUsers(userModels)));
+    }
+
     public List<UserView> getUsers(int page, Sort.Direction sort) {
         return UserMapper.mapToUserViews(userRepository.findAllUsers(
                 PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id"))
         ));
+    }
+
+    public List<UserView> getAllUsers() {
+        return UserMapper.mapToUserViews(userRepository.findAll());
     }
 
     @CachePut(cacheNames = "SingleUser", key = "#result.id")
@@ -48,5 +56,9 @@ public class UserService {
 
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 }

@@ -17,6 +17,7 @@ import pl.nullpointerexeption.restapi.repository.entity.Comment;
 import pl.nullpointerexeption.restapi.repository.entity.Post;
 import pl.nullpointerexeption.restapi.repository.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,10 @@ public class PostService {
         return PostMapper.mapToPostViews(postRepository.findAllPosts(
                 PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id"))
         ));
+    }
+
+    public List<PostView> getAllPosts() {
+        return PostMapper.mapToPostViews(postRepository.findAll());
     }
 
     @Cacheable(cacheNames = "SinglePost", key = "#id")
@@ -54,7 +59,7 @@ public class PostService {
         return PostMapper.mapToPostViews(allPosts);
     }
 
-    private List<Comment> extractComments(List<Comment> comments, Long id) {
+    public List<Comment> extractComments(List<Comment> comments, Long id) {
         return comments.stream()
                 .filter(comment -> comment.getPost().getId().equals(id))
                 .collect(Collectors.toList());
@@ -65,6 +70,12 @@ public class PostService {
         Post post = PostMapper.mapToPost(postModel);
         post.setUser(user);
         return PostMapper.mapToPostView(postRepository.save(post));
+    }
+
+    public List<PostView> addPosts(List<PostModel> postModels) {
+        postModels.forEach(this::addPost);
+        // TODO
+        return new ArrayList<>();
     }
 
     // FIXME: Fix comments
@@ -92,5 +103,9 @@ public class PostService {
         List<Comment> comments = commentRepository.findAllByPostId(post.getId());
         post.setComments(comments);
         return PostMapper.mapToPostView(post);
+    }
+
+    public void deleteAllPosts() {
+        postRepository.deleteAll();
     }
 }

@@ -14,6 +14,7 @@ import pl.nullpointerexeption.restapi.repository.PostRepository;
 import pl.nullpointerexeption.restapi.repository.entity.Comment;
 import pl.nullpointerexeption.restapi.repository.entity.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,10 +38,20 @@ public class CommentService {
         return CommentMapper.mapToCommentView(commentRepository.save(comment));
     }
 
+    public List<CommentView> addComments(List<CommentModel> commentModels) {
+        commentModels.forEach(this::addComment);
+        // TODO
+        return new ArrayList<>();
+    }
+
     public List<CommentView> getComments(int page, Sort.Direction sort) {
         return CommentMapper.mapToCommentViews(commentRepository.findAllComments(
                 PageRequest.of(page, PAGE_SIZE, Sort.by(sort, "id"))
         ));
+    }
+
+    public List<CommentView> getAllComments() {
+        return CommentMapper.mapToCommentViews(commentRepository.findAll());
     }
 
     @CachePut(cacheNames = "SingleComment", key = "#result.id")
@@ -52,5 +63,9 @@ public class CommentService {
 
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    public void deleteAllComments() {
+        commentRepository.deleteAll();
     }
 }

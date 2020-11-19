@@ -26,13 +26,23 @@ public class UserMapper {
         if (user == null) {
             return null;
         }
-        return new UserView(user.getId(),
+        return new UserView(
+                user.getId(),
                 user.getCreated(),
                 user.getModified(),
                 user.getFirstName(),
                 user.getSecondName(),
                 user.getSurname(),
                 PostMapper.mapToPostViews(user.getPosts()));
+    }
+
+    public static List<User> mapToUsers(List<UserModel> users) {
+        if (users == null) {
+            return new ArrayList<>();
+        }
+        return users.stream()
+                .map(UserMapper::mapToUser)
+                .collect(Collectors.toList());
     }
 
     public static User mapToUser(UserModel userModel) {
