@@ -99,8 +99,6 @@ class CommentMapperTest {
     void shouldMapToComment() {
         //given
         CommentModel commentModel = new CommentModel("KKKKKK", 1L);
-        Comment.builder().content("commentModel");
-        Comment.builder().build();
         //when
         Comment comment = CommentMapper.mapToComment(commentModel);
         //then

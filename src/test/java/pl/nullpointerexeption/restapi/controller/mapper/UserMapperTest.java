@@ -100,10 +100,6 @@ class UserMapperTest {
     void shouldMapToUser() {
         //given
         UserModel userModel = new UserModel("Kinga", "Barbara", "Wojtaś");
-        User.builder().firstName("Kinga");
-        User.builder().secondName("Barbara");
-        User.builder().surname("Wojtaś");
-        User.builder();
         //when
         User user = UserMapper.mapToUser(userModel);
         //then

@@ -100,9 +100,6 @@ class PostMapperTest {
     void shouldMapToPost() {
         //given
         PostModel postModel = new PostModel("tytuł1", "post1", 1L);
-        Post.builder().content("post1");
-        Post.builder().title("tytuł1");
-        Post.builder().build();
         //when
         Post post = PostMapper.mapToPost(postModel);
         //than
