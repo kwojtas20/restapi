@@ -46,6 +46,9 @@ public class UserMapper {
     }
 
     public static User mapToUser(UserModel userModel) {
+        if (userModel == null) {
+            return null;
+        }
         return User.builder()
                 .firstName(userModel.getFirstName())
                 .secondName(userModel.getSecondName())
