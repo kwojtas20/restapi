@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 class RestapiApplicationTest {
 
     @Test
-    void test1() {
-        log.info("Test 1");
-
-
+    void shouldRunApplication() {
         Assertions.assertTrue(true);
     }
 }

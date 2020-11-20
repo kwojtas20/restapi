@@ -43,6 +43,9 @@ public class CommentMapper {
     }
 
     public static Comment mapToComment(CommentModel commentModel) {
+        if (commentModel == null) {
+            return null;
+        }
         return Comment.builder()
                 .content(commentModel.getContent())
                 .build();
