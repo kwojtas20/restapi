@@ -44,4 +44,21 @@ class PostServiceTest {
         assertThat(singlePost.getId()).isEqualTo(newPost.getId());
     }
 
+    @Test
+    void shouldGetAllPosts() {
+        //given
+        User newUser = new User();
+        newUser.setFirstName("Kinga");
+        newUser.setSecondName("Maria");
+        newUser.setSurname("Wojtaś");
+        userRepository.save(newUser);
+
+        Post newPost = new Post();
+        newPost.setTitle("Test");
+        newPost.setContent("Test content");
+        newPost.setUser(newUser);
+        postRepository.save(newPost);
+        //when
+        //that
+    }
 }

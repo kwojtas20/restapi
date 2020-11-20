@@ -45,6 +45,9 @@ public class PostMapper {
     }
 
     public static Post mapToPost(PostModel postModel) {
+        if (postModel == null) {
+            return null;
+        }
         return Post.builder()
                 .title(postModel.getTitle())
                 .content(postModel.getContent())
