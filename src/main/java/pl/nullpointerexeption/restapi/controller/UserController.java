@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nullpointerexeption.restapi.controller.model.UserModel;
+import pl.nullpointerexeption.restapi.controller.validator.UserValidator;
 import pl.nullpointerexeption.restapi.controller.view.UserView;
 import pl.nullpointerexeption.restapi.service.UserService;
 
@@ -23,6 +24,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserValidator userValidator;
 
     @GetMapping("/{userId}")
     public UserView getSingleUser(@PathVariable Long userId) {
@@ -31,6 +33,7 @@ public class UserController {
 
     @PostMapping
     public UserView addUser(@RequestBody UserModel userModel) {
+        userValidator.checkUserModel(userModel);
         return userService.addUser(userModel);
     }
 
@@ -45,6 +48,7 @@ public class UserController {
 
     @PutMapping("/{userId}")
     public UserView editUser(@PathVariable Long userId, @RequestBody UserModel userModel) {
+        userValidator.checkUserModel(userModel);
         return userService.editUser(userId, userModel);
     }
 

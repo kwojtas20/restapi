@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.nullpointerexeption.restapi.controller.model.CommentModel;
+import pl.nullpointerexeption.restapi.controller.validator.CommentValidator;
 import pl.nullpointerexeption.restapi.controller.view.CommentView;
 import pl.nullpointerexeption.restapi.service.CommentService;
 
@@ -23,6 +24,7 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
+    private final CommentValidator commentValidator;
 
     @GetMapping("/{commentId}")
     public CommentView getSingleComment(@PathVariable Long commentId) {
@@ -31,6 +33,7 @@ public class CommentController {
 
     @PostMapping
     public CommentView addComment(@RequestBody CommentModel commentModel) {
+        commentValidator.checkCommentModel(commentModel);
         return commentService.addComment(commentModel);
     }
 
@@ -45,6 +48,7 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     public CommentView editComment(@PathVariable Long commentId, @RequestBody CommentModel commentModel) {
+        commentValidator.checkCommentModel(commentModel);
         return commentService.editComment(commentId, commentModel);
     }
 
